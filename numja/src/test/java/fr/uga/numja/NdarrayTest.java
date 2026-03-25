@@ -53,7 +53,7 @@ public class NdarrayTest {
     @Test
     public void testToStringZerosNdarray2D(){
         Ndarray array = Ndarray.zeros(2,5);
-        assertEquals("Array should have 10 zeros", "[[0.0 , 0.0 , 0.0 , 0.0 , 0.0 ],\n[0.0 , 0.0 , 0.0 , 0.0 , 0.0 ]]", array.toString());
+        assertEquals("Array should have 2 times 5 zeros", "[[0.0 , 0.0 , 0.0 , 0.0 , 0.0 ],\n[0.0 , 0.0 , 0.0 , 0.0 , 0.0 ]]", array.toString());
     }
 
 }
