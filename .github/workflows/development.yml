@@ -22,7 +22,7 @@ jobs:
           java-version: '21'
           distribution: 'oracle'
       - name: "Run the Maven compile script"
-        working-directory: ./numja
+        working-directory: numja
         run: mvn compile
   test:
     name: Start Maven Tests
@@ -31,5 +31,5 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: "Run the Maven test script"
-        working-directory: ./numja
+        working-directory: numja
         run: mvn test
