@@ -1,4 +1,4 @@
-name: Unit tests
+name: CI - Unit tests
 
 on:
   pull_request:
