@@ -45,8 +45,18 @@ public class NdarrayTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testCreateArangeNdarray2DInvalidRows(){
+    public void testCreateArangeNdarrayInvalidStart(){
         Ndarray.arange(-1);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testCreateArangeNdarrayInvalidSartStop(){
+        Ndarray.arange(5 , 1);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testCreateArangeNdarrayInvalidSartStopWithStep(){
+        Ndarray.arange(10 , 0, 0.02F);
     }
 
     @Test
