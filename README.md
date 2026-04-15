@@ -1,6 +1,6 @@
 # Numja - A Numpy equivalent for Java
 
-| | | 
+| --- | --- | 
 | Testing | [![Unit tests](https://github.com/Deo-Favente/Numja/actions/workflows/development.yml/badge.svg)](https://github.com/Deo-Favente/Numja/actions/workflows/development.yml) |
 | Coverage | ![Coverage](badges/jacoco.svg) |
 | Package | |
