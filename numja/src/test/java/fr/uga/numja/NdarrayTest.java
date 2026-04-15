@@ -44,6 +44,47 @@ public class NdarrayTest {
         assertArrayEquals("Created array should have the shape", shape, array.getShape());
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testCreateArangeNdarray2DInvalidRows(){
+        Ndarray.arange(-1);
+    }
+
+    @Test
+    public void testCreateArangeNdarryStart(){
+        Ndarray array = Ndarray.arange(3);
+        int[] shape = new int[2];
+        shape[0] = 3;
+        shape[1] = 0;
+        assertEquals("Created array should have size", 3, array.getSize());
+        assertEquals("Created array should have dimension ", 1, array.getNdim());
+        assertArrayEquals("Created array should have the shape", shape, array.getShape());
+        assertEquals("Array should have 0 to 2", "[0.0 , 1.0 , 2.0 ]", array.toString());
+    }
+
+    @Test
+    public void testCreateArangeNdarryStartStop(){
+        Ndarray array = Ndarray.arange(1, 3);
+        int[] shape = new int[2];
+        shape[0] = 2;
+        shape[1] = 0;
+        assertEquals("Created array should have size", 2, array.getSize());
+        assertEquals("Created array should have dimension ", 1, array.getNdim());
+        assertArrayEquals("Created array should have the shape", shape, array.getShape());
+        assertEquals("Array should have 0 to 2", "[1.0 , 2.0 ]", array.toString());
+    }
+
+    @Test
+    public void testCreateArangeNdarryStartStopStep(){
+        Ndarray array = Ndarray.arange(1, 3, 0.5F);
+        int[] shape = new int[2];
+        shape[0] = 4;
+        shape[1] = 0;
+        assertEquals("Created array should have size", 4, array.getSize());
+        assertEquals("Created array should have dimension ", 1, array.getNdim());
+        assertArrayEquals("Created array should have the shape", shape, array.getShape());
+        assertEquals("Array should have 0 to 2", "[1.0 , 1.5 , 2.0 , 2.5 ]", array.toString());
+    }
+
     @Test
     public void testToStringZerosNdarray1D(){
         Ndarray array = Ndarray.zeros(10);

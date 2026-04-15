@@ -8,7 +8,7 @@ public class Ndarray {
     private float[][] data;
 
     private Ndarray(){
-
+        this.shape = new int[2];
     }
 
     //constructor for 1D array of zeros
@@ -29,7 +29,6 @@ public class Ndarray {
         if(rows > 0){
             array.ndim += 1;
         }
-        array.shape = new int[2];
         array.shape[0] = cols;
         array.shape[1] = rows;
         array.size = cols;
@@ -60,6 +59,45 @@ public class Ndarray {
 
         return array;
     }
+
+    static public Ndarray arange(float stop){
+        return arange(0, stop, 1);
+    }
+
+    static public Ndarray arange(float start, float stop){
+        return arange(start, stop, 1);
+    }
+
+    static public Ndarray arange(float start, float stop, float step){
+        if(stop < start){
+            throw new IllegalArgumentException();
+        }
+        Ndarray array = new Ndarray();
+        int nelem;
+
+        array.ndim = 1;
+
+        if (step > 0) {
+            nelem = (int) Math.ceil((stop - start) / step);
+        } else {
+            nelem = (int) Math.ceil((start - stop) / (-step));
+        }
+
+        array.shape[0] = nelem;
+        array.shape[1] = 0;
+        array.size = nelem;
+
+        array.data = new float[1][nelem];
+        float val = start;
+        for (int i = 0; i < nelem; i++) {
+            array.data[0][i] = val;
+            val += step;
+        }
+
+        return array;
+    }
+
+
 
     public String toString(){
         StringBuilder string = new StringBuilder();
