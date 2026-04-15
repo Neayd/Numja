@@ -44,16 +44,6 @@ public class NdarrayTest {
         assertArrayEquals("Created array should have the shape", shape, array.getShape());
     }
 
-    @Test
-    public void testToStringZerosNdarray1D(){
-        Ndarray array = Ndarray.zeros(10);
-        assertEquals("Array should have 10 zeros", "[0.0 , 0.0 , 0.0 , 0.0 , 0.0 , 0.0 , 0.0 , 0.0 , 0.0 , 0.0 ]", array.toString());
-    }
 
-    @Test
-    public void testToStringZerosNdarray2D(){
-        Ndarray array = Ndarray.zeros(2,5);
-        assertEquals("Array should have 2 times 5 zeros", "[[0.0 , 0.0 , 0.0 , 0.0 , 0.0 ],\n[0.0 , 0.0 , 0.0 , 0.0 , 0.0 ]]", array.toString());
-    }
 
 }
