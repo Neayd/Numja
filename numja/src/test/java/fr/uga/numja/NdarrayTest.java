@@ -59,6 +59,16 @@ public class NdarrayTest {
         Ndarray.arange(10 , 0, 0.02F);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testCreateArangeNdarrayInvalidSartStopWithNegStep(){
+        Ndarray.arange(0 , 10, -0.02F);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testCreateArangeNdarrayInvalidStep(){
+        Ndarray.arange(0 , 10, 0);
+    }
+
     @Test
     public void testCreateArangeNdarryStart(){
         Ndarray array = Ndarray.arange(3);
@@ -93,6 +103,18 @@ public class NdarrayTest {
         assertEquals("Created array should have dimension ", 1, array.getNdim());
         assertArrayEquals("Created array should have the shape", shape, array.getShape());
         assertEquals("Array should have 0 to 2", "[1.0 , 1.5 , 2.0 , 2.5 ]", array.toString());
+    }
+
+    @Test
+    public void testCreateArangeNdarryStartStopNegStep(){
+        Ndarray array = Ndarray.arange(3, 1, -0.5F);
+        int[] shape = new int[2];
+        shape[0] = 4;
+        shape[1] = 0;
+        assertEquals("Created array should have size", 4, array.getSize());
+        assertEquals("Created array should have dimension ", 1, array.getNdim());
+        assertArrayEquals("Created array should have the shape", shape, array.getShape());
+        assertEquals("Array should have 0 to 2", "[3.0 , 2.5 , 2.0 , 1.5 ]", array.toString());
     }
 
     @Test
