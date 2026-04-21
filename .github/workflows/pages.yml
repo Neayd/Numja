@@ -34,13 +34,14 @@ jobs:
 
       - name: Generate Javadoc
         working-directory: numja
-        run: mvn javadoc:javadoc
+        run: |
+          mvn compile javadoc:javadoc
+          mkdir -p ../site/apidocs
+          cp -r target/reports/apidocs/. ../site/apidocs/
 
       - name: Convert README to landing page
         run: |
           sudo apt-get install -y pandoc
-          mkdir -p site/apidocs
-          cp -r numja/target/site/apidocs/. site/apidocs/
           pandoc README.md -o site/index.html --metadata title="Numja"
 
       - name: Setup GitHub Pages
