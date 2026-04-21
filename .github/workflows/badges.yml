@@ -1,4 +1,4 @@
-name: Coverage
+name: Badges - Code Coverage
 
 on:
   push:
