@@ -201,6 +201,12 @@ public class NdarrayTest {
     public void testReshape1Dto1D(){
         Ndarray array = Ndarray.arange(4);
         array.reshape(4,0);
+        int[] shape = new int[2];
+        shape[0] = 4;
+        shape[1] = 0;
+        assertEquals("Created array should have size", 4, array.getSize());
+        assertEquals("Created array should have dimension ", 1, array.getNdim());
+        assertArrayEquals("Created array should have the shape", shape, array.getShape());
     }
 
     @Test
