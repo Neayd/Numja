@@ -350,4 +350,86 @@ public class Ndarray {
     public int[] getShape() {
         return shape.clone();
     }
+
+    /**
+     * Returns a new Ndarray with value added to each element.
+     *
+     * @param value scalar to add
+     *
+     * @return new Ndarray
+     */
+    public Ndarray add(float value) {
+        Ndarray result = new Ndarray();
+        result.ndim = this.ndim;
+        result.shape = this.shape.clone();
+        result.size = this.size;
+        result.data = new float[this.data.length][];
+        for (int i = 0; i < this.data.length; i++) {
+            result.data[i] = this.data[i].clone();
+            for (int j = 0; j < result.data[i].length; j++) {
+                result.data[i][j] += value;
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Returns a new Ndarray with element-wise addition of another Ndarray.
+     * Shapes must match.
+     *
+     * @param other Ndarray to add
+     *
+     * @return new Ndarray
+     */
+    public Ndarray add(Ndarray other) {
+        if (other == null || this.ndim != other.ndim
+                || this.shape[0] != other.shape[0]
+                || this.shape[1] != other.shape[1]) {
+            throw new IllegalArgumentException("Shapes must match for element-wise addition");
+        }
+        Ndarray result = new Ndarray();
+        result.ndim = this.ndim;
+        result.shape = this.shape.clone();
+        result.size = this.size;
+        result.data = new float[this.data.length][];
+        for (int i = 0; i < this.data.length; i++) {
+            result.data[i] = this.data[i].clone();
+            for (int j = 0; j < result.data[i].length; j++) {
+                result.data[i][j] += other.data[i][j];
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Adds value to each element in place.
+     *
+     * @param value scalar to add
+     */
+    public void addEquals(float value) {
+        for (int i = 0; i < this.data.length; i++) {
+            for (int j = 0; j < this.data[i].length; j++) {
+                this.data[i][j] += value;
+            }
+        }
+    }
+
+    /**
+     * Adds another Ndarray element-wise in place.
+     * Shapes must match.
+     *
+     * @param other Ndarray to add
+     */
+    public void addEquals(Ndarray other) {
+        if (other == null || this.ndim != other.ndim
+                || this.shape[0] != other.shape[0]
+                || this.shape[1] != other.shape[1]) {
+            throw new IllegalArgumentException("Shapes must match for element-wise addition");
+        }
+        for (int i = 0; i < this.data.length; i++) {
+            for (int j = 0; j < this.data[i].length; j++) {
+                this.data[i][j] += other.data[i][j];
+            }
+        }
+    }
 }

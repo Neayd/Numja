@@ -375,4 +375,133 @@ public class NdarrayTest {
         assertEquals("Array should have 2 times 5 zeros", "[[0.0 , 0.0 , 0.0 , 0.0 , 0.0 ],\n[0.0 , 0.0 , 0.0 , 0.0 , 0.0 ]]", array.toString());
     }
 
+    @Test
+    public void testAddScalar1D() {
+        float[] tab = {1, 2, 3};
+        Ndarray array = Ndarray.array(tab);
+        Ndarray result = array.add(10);
+        assertEquals("add scalar 1D", "[11.0 , 12.0 , 13.0 ]", result.toString());
+        assertEquals("original must be unchanged after add", "[1.0 , 2.0 , 3.0 ]", array.toString());
+    }
+
+    @Test
+    public void testAddScalar2D() {
+        float[] subtab1 = {1, 2};
+        float[] subtab2 = {3, 4};
+        float[][] tab = {subtab1, subtab2};
+        Ndarray array = Ndarray.array(tab);
+        Ndarray result = array.add(1);
+        assertEquals("add scalar 2D", "[[2.0 , 3.0 ],\n[4.0 , 5.0 ]]", result.toString());
+    }
+
+
+    @Test
+    public void testAddNdarray1D() {
+        float[] taba = {1, 2, 3};
+        float[] tabb = {4, 5, 6};
+        Ndarray a = Ndarray.array(taba);
+        Ndarray b = Ndarray.array(tabb);
+        Ndarray result = a.add(b);
+        assertEquals("original must be unchanged", "[1.0 , 2.0 , 3.0 ]", a.toString());
+        assertEquals("element-wise add 1D", "[5.0 , 7.0 , 9.0 ]", result.toString());
+    }
+
+    @Test
+    public void testAddNdarray2D() {
+        float[] subtab1a = {1, 2};
+        float[] subtab2a = {3, 4};
+        float[][] taba = {subtab1a, subtab2a};
+        float[] subtab1b = {10, 20};
+        float[] subtab2b = {30, 40};
+        float[][] tabb = {subtab1b, subtab2b};
+        Ndarray a = Ndarray.array(taba);
+        Ndarray b = Ndarray.array(tabb);
+        Ndarray result = a.add(b);
+        assertEquals("element-wise add 2D", "[[11.0 , 22.0 ],\n[33.0 , 44.0 ]]", result.toString());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testAddNdarrayNull() {
+        float[] tab = {1, 2, 3};
+        Ndarray a = Ndarray.array(tab);
+        a.add((Ndarray) null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testAddNdarrayShapeMismatch() {
+        float[] taba = {1, 2, 3};
+        float[] tabb = {1, 2};
+        Ndarray a = Ndarray.array(taba);
+        Ndarray b = Ndarray.array(tabb);
+        a.add(b);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testAddNdarrayDimMismatch() {
+        float[] taba = {1, 2, 3};
+        float[] subtab1b = {1, 2, 3};
+        float[][] tabb = {subtab1b};
+        Ndarray a = Ndarray.array(taba);
+        Ndarray b = Ndarray.array(tabb);
+        a.add(b);
+    }
+
+    @Test
+    public void testAddEqualsScalar1D() {
+        float[] tab = {1, 2, 3};
+        Ndarray array = Ndarray.array(tab);
+        array.addEquals(10);
+        assertEquals("addEquals scalar 1D modifies in place", "[11.0 , 12.0 , 13.0 ]", array.toString());
+    }
+
+    @Test
+    public void testAddEqualsScalar2D() {
+        float[] subtab1 = {1, 2};
+        float[] subtab2 = {3, 4};
+        float[][] tab = {subtab1, subtab2};
+        Ndarray array = Ndarray.array(tab);
+        array.addEquals(1);
+        assertEquals("addEquals scalar 2D modifies in place", "[[2.0 , 3.0 ],\n[4.0 , 5.0 ]]", array.toString());
+    }
+
+    @Test
+    public void testAddEqualsNdarray1D() {
+        float[] taba = {1, 2, 3};
+        float[] tabb = {4, 5, 6};
+        Ndarray a = Ndarray.array(taba);
+        Ndarray b = Ndarray.array(tabb);
+        a.addEquals(b);
+        assertEquals("addEquals ndarray 1D modifies in place", "[5.0 , 7.0 , 9.0 ]", a.toString());
+    }
+
+    @Test
+    public void testAddEqualsNdarray2D() {
+        float[] subtab1a = {1, 2};
+        float[] subtab2a = {3, 4};
+        float[][] taba = {subtab1a, subtab2a};
+        float[] subtab1b = {10, 20};
+        float[] subtab2b = {30, 40};
+        float[][] tabb = {subtab1b, subtab2b};
+        Ndarray a = Ndarray.array(taba);
+        Ndarray b = Ndarray.array(tabb);
+        a.addEquals(b);
+        assertEquals("addEquals ndarray 2D modifies in place", "[[11.0 , 22.0 ],\n[33.0 , 44.0 ]]", a.toString());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testAddEqualsNdarrayNull() {
+        float[] tab = {1, 2, 3};
+        Ndarray a = Ndarray.array(tab);
+        a.addEquals((Ndarray) null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testAddEqualsNdarrayShapeMismatch() {
+        float[] taba = {1, 2, 3};
+        float[] tabb = {1, 2};
+        Ndarray a = Ndarray.array(taba);
+        Ndarray b = Ndarray.array(tabb);
+        a.addEquals(b);
+    }
+
 }
