@@ -171,6 +171,84 @@ public class NdarrayTest {
         assertEquals("Array should have 0 to 2", "[3.0 , 2.5 , 2.0 , 1.5 ]", array.toString());
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testReshapeNegFirstDim(){
+        Ndarray array = Ndarray.arange(5);
+        array.reshape(0,5);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testReshapeNegSecondDim(){
+        float[][] tab = {{0,1},{2,3}};
+        Ndarray array = Ndarray.array(tab);
+        array.reshape(5,-1);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testReshapeInvalidSize1Dto1D(){
+        Ndarray array = Ndarray.arange(4);
+        array.reshape(5,0);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testReshapeInvalidSize2Dto1D(){
+        float[][] tab = {{0,1},{2,3}};
+        Ndarray array = Ndarray.array(tab);
+        array.reshape(5,0);
+    }
+
+    @Test
+    public void testReshape1Dto1D(){
+        Ndarray array = Ndarray.arange(4);
+        array.reshape(4,0);
+    }
+
+    @Test
+    public void testReshape2Dto1D(){
+        float[][] tab = {{0,1},{2,3}};
+        Ndarray array = Ndarray.array(tab);
+        array.reshape(4,0);
+        int[] shape = new int[2];
+        shape[0] = 4;
+        shape[1] = 0;
+        assertEquals("Created array should have size", 4, array.getSize());
+        assertEquals("Created array should have dimension ", 1, array.getNdim());
+        assertArrayEquals("Created array should have the shape", shape, array.getShape());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testReshapeInvalidSize1Dto2D(){
+        Ndarray array = Ndarray.arange(4);
+        array.reshape(3,2);
+    }
+
+    @Test
+    public void testReshape1Dto2D(){
+        Ndarray array = Ndarray.arange(6);
+        array.reshape(2,3);
+        int[] shape = new int[2];
+        shape[0] = 2;
+        shape[1] = 3;
+        assertEquals("Created array should have size", 6, array.getSize());
+        assertEquals("Created array should have dimension ", 2, array.getNdim());
+        assertArrayEquals("Created array should have the shape", shape, array.getShape());
+        assertEquals("Firs element of the second row should be ", 3, array.get(1,0), 1e-6f);
+    }
+
+    @Test
+    public void testReshape2Dto2D(){
+        float[][] tab = {{0,1,2},{3,4,5}};
+        Ndarray array = Ndarray.array(tab);
+        array.reshape(3,2);
+        int[] shape = new int[2];
+        shape[0] = 3;
+        shape[1] = 2;
+        assertEquals("Created array should have size", 6, array.getSize());
+        assertEquals("Created array should have dimension ", 2, array.getNdim());
+        assertArrayEquals("Created array should have the shape", shape, array.getShape());
+        assertEquals("Firs element of the third row should be ", 4, array.get(2,0), 1e-6f);
+    }
+
     @Test(expected = UnsupportedOperationException.class)
     public void testGet1DOn2D(){
         float[] subtab1 = {0,1};

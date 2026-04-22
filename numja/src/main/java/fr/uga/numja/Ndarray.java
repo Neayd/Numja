@@ -196,6 +196,75 @@ public class Ndarray {
     }
 
     /**
+     * Reshapes the current array to the given dimensions.
+     *
+     * @param firstDim  size of the first dimension
+     * @param secondDim size of the second dimension (use 0 for 1D reshape).
+     */
+    public void reshape(int firstDim, int secondDim){
+        if(firstDim <= 0 || secondDim < 0){
+            throw new IllegalArgumentException();
+        }
+
+        //reshape 1D
+        if(secondDim == 0){
+            if(firstDim != size){
+                throw new IllegalArgumentException("Incompatible reshape");
+            }
+
+            if(ndim == 2){
+                float[] array = new float[size];
+                int k = 0;
+
+                for(int i = 0; i < shape[0]; i++){
+                    for(int j = 0; j < shape[1]; j++){
+                        array[k++] = data[i][j];
+                    }
+                }
+
+                data = new float[1][size];
+                System.arraycopy(array, 0, data[0], 0, size);
+
+                ndim = 1;
+                shape[0] = size;
+                shape[1] = 0;
+            }
+        }else{//reshape 2D
+            if(firstDim * secondDim != size){
+                throw new IllegalArgumentException("Incompatible reshape");
+            }
+
+            float[] array = new float[size];
+            int k = 0;
+
+            //copy data to a flat array
+            if(ndim == 1){
+                System.arraycopy(data[0], 0, array, 0, size);
+            } else {
+                for(int i = 0; i < shape[0]; i++){
+                    for(int j = 0; j < shape[1]; j++){
+                        array[k++] = data[i][j];
+                    }
+                }
+            }
+
+            // rebuild 2D
+            float[][] newData = new float[firstDim][secondDim];
+            k = 0;
+            for(int i = 0; i < firstDim; i++){
+                for(int j = 0; j < secondDim; j++){
+                    newData[i][j] = array[k++];
+                }
+            }
+
+            data = newData;
+            ndim = 2;
+            shape[0] = firstDim;
+            shape[1] = secondDim;
+        }
+    }
+
+    /**
      * Gets an element from a 1D array.
      *
      * @param index position
