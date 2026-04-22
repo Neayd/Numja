@@ -18,4 +18,4 @@ COPY . .
 WORKDIR /app/numja/
 RUN mvn clean package -DskipTests
 
-CMD ["java", "-cp", "target/numja-1.0-SNAPSHOT.jar", "fr.uga.numja.Demo"]
+CMD ["java", "-cp", "target/numja-2.0-SNAPSHOT.jar", "fr.uga.numja.Demo"]

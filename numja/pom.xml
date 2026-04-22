@@ -50,6 +50,11 @@
             <goals>
               <goal>report</goal>
             </goals>
+            <configuration>
+              <excludes>
+                <exclude>fr/uga/numja/Demo.class</exclude>
+              </excludes>
+            </configuration>
           </execution>
           <execution>
             <id>check</id>
