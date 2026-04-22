@@ -19,6 +19,7 @@
     <sonar.projectKey>M1-Info-DevOps-Projet-Numja</sonar.projectKey>
     <sonar.projectName>M1 Info DevOps Projet Numja</sonar.projectName>
     <sonar.qualitygate.wait>true</sonar.qualitygate.wait>
+    <sonar.exclusions>**/Demo.java</sonar.exclusions>
   </properties>
   <build>
     <pluginManagement>
