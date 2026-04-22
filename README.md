@@ -18,6 +18,8 @@ Projet réalisé dans le cadre du cours de DevOps.
 ## Fonctionnalités 
 - Vecteurs (1D) et de matrices (2D)
 - Données de type float supportés
+- Redimensionner un vecteur ou une matrice
+- Operation d'addition avec scalaire ou tableau
 
 ## Installation
 Avec Maven :
